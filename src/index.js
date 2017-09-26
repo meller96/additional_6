@@ -1,3 +1,59 @@
-module.exports = function zeros(expression) {
-  // your solution
+module.exports =  function zeros(str) {
+var arrayOfFacrorials = str.split('*');
+var arrayOfSingle = [];
+var arrayOfDouble = [];
+var amountOfTwos = 0;
+var amountOfFives = 0;
+
+for (var i = 0; i < arrayOfFacrorials.length; i++)
+{
+	if (arrayOfFacrorials[i].indexOf('!!') !== -1)
+	{
+		arrayOfDouble.push(parseInt(arrayOfFacrorials[i]));
+	}
+	else{
+		arrayOfSingle.push(parseInt(arrayOfFacrorials[i]));
+	}
 }
+
+
+
+
+for (var i = 0; i < arrayOfSingle.length; i++) {
+	var factorialOf = arrayOfSingle[i];
+	for (var number = 1; number <= factorialOf; number=number+1)
+	{
+        var currentNumber = number;
+		while (currentNumber % 2 === 0) {
+			currentNumber = currentNumber / 2;
+			amountOfTwos++;
+		}
+		while (currentNumber % 5 === 0) {
+			currentNumber = currentNumber / 5;
+			amountOfFives++;
+		}
+	}
+}
+
+for (var i = 0; i < arrayOfDouble.length; i++) {
+	var factorialOf = arrayOfDouble[i];
+	var isEven = factorialOf % 2 === 0;
+	var startIndex = isEven ? 2 : 1;
+	for (var number = startIndex; number <= factorialOf; number += 2) {
+        var currentNumber = number;
+		while (currentNumber % 2 === 0) {
+			currentNumber = currentNumber / 2;
+			amountOfTwos++;
+		}
+		while (currentNumber % 5 === 0) {
+			currentNumber = currentNumber / 5;
+			amountOfFives++;
+		}
+	}
+}
+return Math.min(amountOfTwos, amountOfFives);
+}
+
+
+
+
